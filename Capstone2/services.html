@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - AutoMob-Mechanic</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0d253f;
+            --accent: #ffb300;
+            --accent2: #ff6f00;
+            --bg: #f8fafc;
+            --text: #222;
+            --light: #fff;
+            --dark: #111;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="dark"] {
+            --primary: #111827;
+            --accent: #ffd166;
+            --accent2: #ff8800;
+            --bg: #181f2a;
+            --text: #f3f3f3;
+            --light: #232b39;
+            --dark: #f3f3f3;
+            --card-bg: rgba(35, 43, 57, 0.9);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+            background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%);
+            color: var(--text);
+            min-height: 100vh;
+            transition: background 0.5s, color 0.5s;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .top-nav {
+            background: var(--primary);
+            padding: 15px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            height: 60px;
+            width: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent);
+        }
+
+        .nav-title {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 12px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a.active {
+            background: var(--accent2);
+            color: white;
+        }
+
+        .menu-icon {
+            display: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Theme toggle */
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .theme-toggle label {
+            color: white;
+            font-weight: 500;
+        }
+
+        .theme-toggle select {
+            padding: 6px 12px;
+            border-radius: 6px;
+            border: 1px solid #cfd8dc;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .theme-toggle select:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Services section */
+        .services-section {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h1 {
+            font-size: 2.8rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header h1::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--accent2);
+            border-radius: 2px;
+        }
+
+        .section-header p {
+            max-width: 700px;
+            margin: 20px auto 0;
+            font-size: 1.1rem;
+            color: var(--text);
+        }
+
+        .services-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .service-link {
+            text-decoration: none;
+        }
+
+        .service-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-img-container {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .service-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .service-card:hover .service-img {
+            transform: scale(1.05);
+        }
+
+        .service-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            padding: 20px;
+            color: white;
+        }
+
+        .service-card h2 {
+            font-size: 1.5rem;
+            color: white;
+            margin-bottom: 5px;
+        }
+
+        .service-content {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-card p {
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+
+        .service-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: var(--accent2);
+            font-weight: 600;
+        }
+
+        .service-price {
+            background: rgba(255, 179, 0, 0.1);
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
+
+        .service-duration {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .btn-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 14px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            background: var(--accent2);
+            color: white;
+            border: 2px solid var(--accent2);
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: var(--accent);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(255, 111, 0, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 40px 0;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--accent2);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .contact-item i {
+            color: var(--accent2);
+            font-size: 1.2rem;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .services-list {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                right: 0;
+                background: var(--primary);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+                z-index: 1000;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .menu-icon {
+                display: block;
+            }
+            
+            .section-header h1 {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .services-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .service-img-container {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="top-nav">
+        <div class="nav-container">
+            <div class="logo-container">
+                <img src="FRIENDSHIP (3).png" alt="AutoMob-Mechanic Logo" class="logo">
+                <div class="nav-title">AutoMob-Mechanic</div>
+            </div>
+            <div class="nav-links">
+                <a href="home.html"><i class="fas fa-home"></i> Accueil</a>
+                <a href="../index.html"><i class="fas fa-globe"></i> Landing Page</a>
+                <a href="../Capstone1/Homepage.html"><i class="fas fa-rocket"></i> Capstone1</a>
+                <a href="services.html" class="active"><i class="fas fa-tools"></i> Services</a>
+                <a href="booking.html"><i class="fas fa-calendar-check"></i> Réservation</a>
+                <a href="mailto:contact@automob.co.in"><i class="fas fa-envelope"></i> Contact</a>
+            </div>
+            <div class="nav-right">
+                <div class="theme-toggle">
+                    <label for="theme-select">Thème :</label>
+                    <select id="theme-select">
+                        <option value="auto">Automatique</option>
+                        <option value="light">Clair</option>
+                        <option value="dark">Sombre</option>
+                    </select>
+                </div>
+                <div class="menu-icon">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Services section -->
+    <section class="services-section">
+        <div class="section-header">
+            <h1>Nos Services</h1>
+            <p>Découvrez notre gamme complète de services professionnels pour l'entretien et la réparation de votre véhicule</p>
+        </div>
+        
+        <div class="services-list">
+            <a href="entretien.html" class="service-link">
+                <div class="service-card">
+                    <div class="service-img-container">
+                        <img src="tim-mossholder-V37iTrYZz2E-unsplash.jpg" alt="Entretien général" class="service-img">
+                        <div class="service-overlay">
+                            <h2>Entretien général</h2>
+                        </div>
+                    </div>
+                    <div class="service-content">
+                        <p>Vidange, filtres, contrôle des niveaux, vérification des freins et pneus. Un entretien complet pour maintenir votre véhicule en parfait état.</p>
+                        <div class="service-meta">
+                            <div class="service-price">À partir de 49€</div>
+                            <div class="service-duration"><i class="fas fa-clock"></i> 1-2 heures</div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            
+            <a href="mecanique.html" class="service-link">
+                <div class="service-card">
+                    <div class="service-img-container">
+                        <img src="sten-rademaker-UZUzvJEvKnI-unsplash.jpg" alt="Réparation mécanique" class="service-img">
+                        <div class="service-overlay">
+                            <h2>Réparation mécanique</h2>
+                        </div>
+                    </div>
+                    <div class="service-content">
+                        <p>Moteur, transmission, suspension, direction, échappement et plus. Nos mécaniciens experts résolvent tous vos problèmes mécaniques.</p>
+                        <div class="service-meta">
+                            <div class="service-price">À partir de 99€</div>
+                            <div class="service-duration"><i class="fas fa-clock"></i> 2-4 heures</div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            
+            <a href="car-care-service.html" class="service-link">
+                <div class="service-card">
+                    <div class="service-img-container">
+                        <img src="komorebi-photo-r8yOvZbsIag-unsplash.jpg" alt="Diagnostic électronique" class="service-img">
+                        <div class="service-overlay">
+                            <h2>Diagnostic électronique</h2>
+                        </div>
+                    </div>
+                    <div class="service-content">
+                        <p>Lecture des codes défaut, diagnostic des voyants, réparation des systèmes électroniques. Technologie de pointe pour un diagnostic précis.</p>
+                        <div class="service-meta">
+                            <div class="service-price">À partir de 69€</div>
+                            <div class="service-duration"><i class="fas fa-clock"></i> 1-3 heures</div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            
+            <a href="body-repair-service.html" class="service-link">
+                <div class="service-card">
+                    <div class="service-img-container">
+                        <img src="20250508_1210_Mechanic at Work_simple_compose_01jtqwr3rye38ak8vakxa3y75r.png" alt="Carrosserie & Peinture" class="service-img">
+                        <div class="service-overlay">
+                            <h2>Carrosserie & Peinture</h2>
+                        </div>
+                    </div>
+                    <div class="service-content">
+                        <p>Réparation des bosses, rayures, peinture complète ou partielle. Redonnez à votre véhicule son aspect d'origine avec notre service premium.</p>
+                        <div class="service-meta">
+                            <div class="service-price">À partir de 149€</div>
+                            <div class="service-duration"><i class="fas fa-clock"></i> 1-3 jours</div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            
+            <a href="preventive-maintenance-service.html" class="service-link">
+                <div class="service-card">
+                    <div class="service-img-container">
+                        <img src="20250508_1208_Entretien préventif mécanique_simple_compose_01jtqwms93fsh85rdwzj4twzpx.png" alt="Pré-contrôle technique" class="service-img">
+                        <div class="service-overlay">
+                            <h2>Pré-contrôle technique</h2>
+                        </div>
+                    </div>
+                    <div class="service-content">
+                        <p>Inspection complète pour préparer votre véhicule au contrôle technique. Maximisez vos chances de réussite du premier coup.</p>
+                        <div class="service-meta">
+                            <div class="service-price">89€</div>
+                            <div class="service-duration"><i class="fas fa-clock"></i> 1-2 heures</div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        
+        <div class="btn-container">
+            <button onclick="window.location.href='booking.html'" class="btn">
+                <i class="fas fa-calendar-check"></i> Réservez un service
+            </button>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>AutoMob-Mechanic</h3>
+                <p>Votre partenaire de confiance pour l'entretien et la réparation de votre véhicule. Professionnalisme, qualité et service client exceptionnel.</p>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Liens Rapides</h3>
+                <ul class="footer-links">
+                    <li><a href="home.html"><i class="fas fa-home"></i> Accueil</a></li>
+                    <li><a href="services.html"><i class="fas fa-tools"></i> Services</a></li>
+                    <li><a href="booking.html"><i class="fas fa-calendar-check"></i> Réservation</a></li>
+                    <li><a href="#"><i class="fas fa-info-circle"></i> À propos</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Contactez-nous</h3>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>contact@automob.co.in</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>999 999 9999</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>123 Avenue des Mécaniciens, Dakar</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2025 AutoMob-Mechanic. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Menu mobile toggle
+        const menuIcon = document.querySelector('.menu-icon');
+        const navLinks = document.querySelector('.nav-links');
+        
+        menuIcon.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // Gestion du thème
+        const themeSelect = document.getElementById('theme-select');
+        const root = document.documentElement;
+
+        function applyTheme(theme) {
+            if (theme === 'auto') {
+                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    root.setAttribute('data-theme', 'dark');
+                } else {
+                    root.removeAttribute('data-theme');
+                }
+            } else {
+                root.setAttribute('data-theme', theme);
+            }
+        }
+
+        // Appliquer le thème sauvegardé ou auto
+        const savedTheme = localStorage.getItem('theme') || 'auto';
+        themeSelect.value = savedTheme;
+        applyTheme(savedTheme);
+
+        themeSelect.addEventListener('change', () => {
+            localStorage.setItem('theme', themeSelect.value);
+            applyTheme(themeSelect.value);
+        });
+
+        // Animation des cartes au défilement
+        document.addEventListener('DOMContentLoaded', function() {
+            const serviceCards = document.querySelectorAll('.service-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.style.animation = `fadeInUp 0.5s ease-out forwards`;
+                            entry.target.style.opacity = '0';
+                            entry.target.style.transform = 'translateY(20px)';
+                        }, index * 200);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            serviceCards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                observer.observe(card);
+            });
+            
+            // Ajout de l'animation CSS
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes fadeInUp {
+                    from {
+                        opacity: 0;
+                        transform: translateY(20px);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        });
+    </script>
+</body>
+</html>

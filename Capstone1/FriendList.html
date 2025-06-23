@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friendship Zone - Friends</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #5e35b1;
+            --accent: #ffb300;
+            --accent2: #ff6f00;
+            --bg: #f8fafc;
+            --text: #222;
+            --light: #fff;
+            --dark: #111;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --border: #e0e7ef;
+            --success: #4caf50;
+            --error: #f44336;
+        }
+
+        [data-theme="dark"] {
+            --primary: #211166;
+            --accent: #ffd166;
+            --accent2: #ff8800;
+            --bg: #121212;
+            --text: #f3f3f3;
+            --light: #232b39;
+            --dark: #f3f3f3;
+            --card-bg: rgba(35, 43, 57, 0.95);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            --border: #232b39;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+            background: linear-gradient(135deg, rgba(94, 53, 177, 0.1) 0%, rgba(255, 179, 0, 0.1) 100%);
+            color: var(--text);
+            min-height: 100vh;
+            transition: background 0.5s, color 0.5s;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .top-nav {
+            background: var(--primary);
+            padding: 15px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            height: 60px;
+            width: auto;
+            border-radius: 10px;
+            object-fit: cover;
+            border: 2px solid var(--accent);
+        }
+
+        .nav-title {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 12px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a.active {
+            background: var(--accent2);
+            color: white;
+        }
+
+        .menu-icon {
+            display: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Theme toggle */
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .theme-toggle label {
+            color: white;
+            font-weight: 500;
+        }
+
+        .theme-toggle select {
+            padding: 6px 12px;
+            border-radius: 6px;
+            border: 1px solid #cfd8dc;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .theme-toggle select:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Main Content */
+        .main-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .friends-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .friends-header h1 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .friends-header h1::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--accent2);
+            border-radius: 2px;
+        }
+
+        .friends-header p {
+            max-width: 600px;
+            margin: 25px auto 0;
+            font-size: 1.1rem;
+            color: var(--text);
+        }
+
+        /* Friend Cards */
+        .friends-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+        }
+
+        .friend-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 30px 20px;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: box-shadow 0.3s, transform 0.3s;
+        }
+
+        .friend-card:hover {
+            box-shadow: 0 8px 24px rgba(94, 53, 177, 0.18);
+            transform: translateY(-5px) scale(1.03);
+        }
+
+        /* Avatar with initials */
+        .friend-avatar {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary) 60%, var(--accent2) 100%);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            font-weight: 700;
+            border: 3px solid var(--accent2);
+            margin-bottom: 18px;
+            box-shadow: 0 2px 8px rgba(94, 53, 177, 0.13);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .friend-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .friend-country {
+            font-size: 1rem;
+            color: var(--accent2);
+            margin-bottom: 10px;
+        }
+
+        .friend-interests {
+            font-size: 0.98rem;
+            color: var(--text);
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .tag {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--primary);
+            border-radius: 8px;
+            padding: 3px 10px;
+            margin: 0 3px;
+            font-size: 0.92rem;
+            font-weight: 500;
+        }
+
+        .friend-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .friend-btn {
+            padding: 10px 18px;
+            border-radius: 8px;
+            border: none;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .btn-message {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent2) 100%);
+            color: white;
+            box-shadow: 0 2px 8px rgba(94, 53, 177, 0.13);
+        }
+
+        .btn-message:hover {
+            transform: translateY(-2px);
+            background: linear-gradient(135deg, var(--accent2) 0%, var(--primary) 100%);
+        }
+
+        .btn-remove {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-remove:hover {
+            background: rgba(94, 53, 177, 0.08);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 40px 0;
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--accent2);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .contact-item i {
+            color: var(--accent2);
+            font-size: 1.2rem;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                right: 0;
+                background: var(--primary);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+                z-index: 1000;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .menu-icon {
+                display: block;
+            }
+            
+            .friends-header h1 {
+                font-size: 2rem;
+            }
+            
+            .friend-card {
+                padding: 20px 10px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .nav-title {
+                font-size: 1.5rem;
+            }
+            
+            .friend-avatar {
+                width: 70px;
+                height: 70px;
+                font-size: 1.3rem;
+            }
+            
+            .friend-name {
+                font-size: 1.2rem;
+            }
+            
+            .friend-country {
+                font-size: 0.9rem;
+            }
+            
+            .friend-interests {
+                font-size: 0.9rem;
+            }
+            
+            .friend-btn {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <div class="top-nav">
+        <div class="nav-container">
+            <div class="logo-container">
+                <img src="FRIENDSHIP (5).png" alt="FriendshipZone Logo" class="logo">
+                <div class="nav-title">Friendship Zone</div>
+            </div>
+            <nav class="nav-links">
+                <a href="#"><i class="fas fa-home"></i> Home</a>
+                <a href="#" class="active"><i class="fas fa-users"></i> Friend List</a>
+                <a href="#"><i class="fas fa-user-plus"></i> Registration</a>
+                <a href="#"><i class="fas fa-sign-in-alt"></i> Login</a>
+            </nav>
+            <div class="nav-right">
+                <div class="theme-toggle">
+                    <label for="themeSelect">Theme:</label>
+                    <select id="themeSelect">
+                        <option value="light">Light</option>
+                        <option value="dark">Dark</option>
+                    </select>
+                </div>
+                <div class="menu-icon">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <div class="friends-header">
+            <h1><i class="fas fa-user-friends"></i> Friend List</h1>
+            <p>Welcome to your friendship community. Connect, chat, and build lasting relationships.</p>
+        </div>
+
+        <div class="friends-list">
+            <div class="friend-card">
+                <div class="friend-avatar">NB</div>
+                <div class="friend-info">
+                    <div class="friend-name">Nafissatou Badji</div>
+                    <div class="friend-country">Senegal</div>
+                    <div class="friend-interests">
+                        <span class="tag">Travel</span>
+                        <span class="tag">Music</span>
+                    </div>
+                </div>
+                <div class="friend-actions">
+                    <button class="friend-btn btn-message"><i class="fas fa-comment"></i> Message</button>
+                    <button class="friend-btn btn-remove"><i class="fas fa-user-minus"></i> Remove</button>
+                </div>
+            </div>
+            <div class="friend-card">
+                <div class="friend-avatar">MD</div>
+                <div class="friend-info">
+                    <div class="friend-name">Mariama Dieme</div>
+                    <div class="friend-country">Senegal</div>
+                    <div class="friend-interests">
+                        <span class="tag">Science</span>
+                        <span class="tag">Reading</span>
+                    </div>
+                </div>
+                <div class="friend-actions">
+                    <button class="friend-btn btn-message"><i class="fas fa-comment"></i> Message</button>
+                    <button class="friend-btn btn-remove"><i class="fas fa-user-minus"></i> Remove</button>
+                </div>
+            </div>
+            <div class="friend-card">
+                <div class="friend-avatar">AN</div>
+                <div class="friend-info">
+                    <div class="friend-name">Amadou Joseph Niassy</div>
+                    <div class="friend-country">Senegal</div>
+                    <div class="friend-interests">
+                        <span class="tag">Sports</span>
+                        <span class="tag">Cooking</span>
+                    </div>
+                </div>
+                <div class="friend-actions">
+                    <button class="friend-btn btn-message"><i class="fas fa-comment"></i> Message</button>
+                    <button class="friend-btn btn-remove"><i class="fas fa-user-minus"></i> Remove</button>
+                </div>
+            </div>
+            <div class="friend-card">
+                <div class="friend-avatar">LD</div>
+                <div class="friend-info">
+                    <div class="friend-name">Laryssa Dalya Diop</div>
+                    <div class="friend-country">Senegal</div>
+                    <div class="friend-interests">
+                        <span class="tag">Music</span>
+                        <span class="tag">Fashion</span>
+                    </div>
+                </div>
+                <div class="friend-actions">
+                    <button class="friend-btn btn-message"><i class="fas fa-comment"></i> Message</button>
+                    <button class="friend-btn btn-remove"><i class="fas fa-user-minus"></i> Remove</button>
+                </div>
+            </div>
+            <div class="friend-card">
+                <div class="friend-avatar">MK</div>
+                <div class="friend-info">
+                    <div class="friend-name">Mouhamed Ka</div>
+                    <div class="friend-country">Senegal</div>
+                    <div class="friend-interests">
+                        <span class="tag">Science</span>
+                        <span class="tag">Sport</span>
+                    </div>
+                </div>
+                <div class="friend-actions">
+                    <button class="friend-btn btn-message"><i class="fas fa-comment"></i> Message</button>
+                    <button class="friend-btn btn-remove"><i class="fas fa-user-minus"></i> Remove</button>
+                </div>
+            </div>
+            <div class="friend-card">
+                <div class="friend-avatar">AF</div>
+                <div class="friend-info">
+                    <div class="friend-name">Ariane Fall</div>
+                    <div class="friend-country">Senegal</div>
+                    <div class="friend-interests">
+                        <span class="tag">Dancing</span>
+                        <span class="tag">Reading</span>
+                    </div>
+                </div>
+                <div class="friend-actions">
+                    <button class="friend-btn btn-message"><i class="fas fa-comment"></i> Message</button>
+                    <button class="friend-btn btn-remove"><i class="fas fa-user-minus"></i> Remove</button>
+                </div>
+            </div>
+            <div class="friend-card">
+                <div class="friend-avatar">SS</div>
+                <div class="friend-info">
+                    <div class="friend-name">Sarata Sow</div>
+                    <div class="friend-country">Senegal</div>
+                    <div class="friend-interests">
+                        <span class="tag">Travel</span>
+                        <span class="tag">Music</span>
+                    </div>
+                </div>
+                <div class="friend-actions">
+                    <button class="friend-btn btn-message"><i class="fas fa-comment"></i> Message</button>
+                    <button class="friend-btn btn-remove"><i class="fas fa-user-minus"></i> Remove</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <a href="#" class="cta-link"><i class="fas fa-user-plus"></i> Add More Friends</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>About Us</h3>
+                <p>We are a social platform dedicated to connecting people through friendship. Our mission is to help you find and connect with friends who share your interests and passions.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-angle-right"></i> Home</a></li>
+                    <li><a href="#"><i class="fas fa-angle-right"></i> Friend List</a></li>
+                    <li><a href="#"><i class="fas fa-angle-right"></i> Registration</a></li>
+                    <li><a href="#"><i class="fas fa-angle-right"></i> Login</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>123 Friendship St, Dakar, Senegal</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+221 33 123 45 67</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>info@friendshipzone.sn</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>© 2025 FriendshipZone. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Friend removal functionality
+            document.querySelectorAll('.btn-remove').forEach(function(btn) {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const friendName = btn.closest('.friend-card').querySelector('.friend-name').textContent;
+                    if (confirm(`Are you sure you want to remove ${friendName} from your friend list?`)) {
+                        const card = btn.closest('.friend-card');
+                        card.style.opacity = '0';
+                        card.style.transition = 'opacity 0.3s ease';
+                        
+                        setTimeout(() => {
+                            card.remove();
+                            // Update friend count
+                            const friendCount = document.querySelector('.friend-count strong');
+                            friendCount.textContent = parseInt(friendCount.textContent) - 1;
+                        }, 300);
+                    }
+                });
+            });
+            
+            // Message button functionality
+            document.querySelectorAll('.btn-message').forEach(function(btn) {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const friendName = btn.closest('.friend-card').querySelector('.friend-name').textContent;
+                    alert(`Opening chat with ${friendName}...`);
+                });
+            });
+            
+            // Search functionality
+            const searchInput = document.getElementById('friendSearch');
+            const searchBtn = document.querySelector('.search-btn');
+            
+            function filterFriends() {
+                const filter = searchInput.value.toLowerCase();
+                const cards = document.querySelectorAll('.friend-card');
+                
+                cards.forEach(card => {
+                    const name = card.querySelector('.friend-name').textContent.toLowerCase();
+                    const email = card.querySelector('.friend-email').textContent.toLowerCase();
+                    const tags = card.querySelector('.friend-tags').textContent.toLowerCase();
+                    
+                    if (name.includes(filter) || email.includes(filter) || tags.includes(filter)) {
+                        card.style.display = '';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            }
+            
+            searchInput.addEventListener('keyup', filterFriends);
+            searchBtn.addEventListener('click', filterFriends);
+        });
+    </script>
+</body>
+</html>

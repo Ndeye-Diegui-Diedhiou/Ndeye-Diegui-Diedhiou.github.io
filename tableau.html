@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau des Balises HTML</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <style>
+        /* À placer dans la balise <style> de chaque fichier */
+        :root {
+            --primary: #a4508b;         /* Violet rosé élégant */
+            --accent: #f9d1d1;          /* Rose pâle */
+            --accent2: #ff7eb9;         /* Rose vif */
+            --accent3: #ffe6fa;         /* Lavande pastel */
+            --gold: #ffd6a5;            /* Doré doux */
+            --bg: #fff0f6;              /* Fond rose très clair */
+            --text: #3d2c3c;            /* Brun doux */
+            --light: #fff7fb;           /* Blanc rosé */
+            --dark: #6d466b;            /* Violet foncé */
+            --card-bg: linear-gradient(135deg, #fff7fb 80%, #ffe6fa 100%);
+            --shadow: 0 10px 30px rgba(164, 80, 139, 0.08);
+        }
+
+        [data-theme="dark"] {
+            --primary: #6d466b;
+            --accent: #f9d1d1;
+            --accent2: #ff7eb9;
+            --accent3: #a4508b;
+            --gold: #ffd6a5;
+            --bg: #2d142c;
+            --text: #ffe6f7;
+            --light: #3d2c3c;
+            --dark: #fff0f6;
+            --card-bg: linear-gradient(135deg, #3d2c3c 80%, #6d466b 100%);
+            --shadow: 0 10px 30px rgba(255, 126, 185, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+            background: linear-gradient(135deg, var(--bg) 0%, var(--accent3) 100%);
+            color: var(--text);
+            min-height: 100vh;
+            margin: 0;
+            transition: background 0.5s, color 0.5s;
+        }
+
+        /* Navigation */
+        .top-nav {
+            background: var(--primary);
+            padding: 15px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .nav-title {
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-title i {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 12px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a.active {
+            background: var(--accent2);
+            color: white;
+        }
+
+        /* Theme toggle */
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .theme-toggle label {
+            color: white;
+            font-weight: 500;
+        }
+
+        .theme-toggle select {
+            padding: 6px 12px;
+            border-radius: 6px;
+            border: 1px solid #cfd8dc;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .theme-toggle select:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .print-btn {
+            background: var(--accent2);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .print-btn:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        /* Main content */
+        .table-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .auto-typing {
+            display: inline-block;
+            font-size: 2.2rem;
+            color: var(--accent2);
+            font-weight: bold;
+            min-height: 50px;
+        }
+
+        .page-header p {
+            color: #555;
+            max-width: 700px;
+            margin: 15px auto;
+            font-size: 1.1rem;
+        }
+
+        .search-container {
+            max-width: 600px;
+            margin: 20px auto;
+            position: relative;
+        }
+
+        .search-container input {
+            width: 100%;
+            padding: 14px 20px;
+            padding-left: 50px;
+            font-size: 1.1rem;
+            border: 2px solid var(--accent);
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+
+        .search-container input:focus {
+            outline: none;
+            border-color: var(--accent2);
+            box-shadow: 0 4px 20px rgba(255, 111, 0, 0.2);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--accent2);
+            font-size: 1.4rem;
+        }
+
+        .table-wrapper {
+            background: var(--table-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            margin-bottom: 40px;
+            transition: all 0.3s;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--card-bg);
+            color: var(--text);
+            box-shadow: var(--shadow);
+        }
+
+        th, td {
+            border: 1px solid var(--accent3);
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background: var(--accent);
+            color: var(--primary);
+        }
+
+        tr:nth-child(even) {
+            background: var(--light);
+        }
+
+        td:first-child {
+            font-weight: 600;
+            color: var(--accent2);
+            font-family: 'Courier New', monospace;
+        }
+
+        .tag-example {
+            display: block;
+            margin-top: 5px;
+            font-size: 0.9rem;
+            color: #666;
+            font-family: 'Courier New', monospace;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin: 20px 0;
+        }
+
+        .footer-links a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .footer-links a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .nav-links {
+                gap: 15px;
+            }
+            
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .auto-typing {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-right {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            th, td {
+                padding: 12px 15px;
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .table-container {
+                padding: 0 10px;
+            }
+            
+            .page-header {
+                padding: 20px 15px;
+            }
+            
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="top-nav">
+        <div class="nav-container">
+            <div class="nav-title">
+                <i class="fas fa-code"></i>
+                <span>Tableau des Balises HTML</span>
+            </div>
+            <div class="nav-links">
+                <a href="index.html"><i class="fas fa-home"></i> Accueil</a>
+                <a href="../Capstone1/Homepage.html"><i class="fas fa-project-diagram"></i> Capstone1</a>
+                <a href="../Capstone2/home.html"><i class="fas fa-tools"></i> Capstone2</a>
+                <a href="emploi du temps.html"><i class="fas fa-calendar"></i> Emploi du temps</a>
+                <a href="tableau.html" class="active"><i class="fas fa-table"></i> Tableau des balises</a>
+                <a href="CV.html"><i class="fas fa-file-alt"></i> CV</a>
+            </div>
+            <div class="nav-right">
+                <div class="theme-toggle">
+                    <label for="theme-select">Thème :</label>
+                    <select id="theme-select">
+                        <option value="auto">Automatique</option>
+                        <option value="light">Clair</option>
+                        <option value="dark">Sombre</option>
+                    </select>
+                </div>
+                <button class="print-btn" onclick="window.print()"><i class="fas fa-print"></i> Imprimer</button>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Main content -->
+    <div class="table-container">
+        <div class="page-header">
+            <h1>Tableau des Balises: <span class="auto-typing"></span></h1>
+            <p>Référence complète des balises HTML essentielles avec leurs fonctions et exemples</p>
+            
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="search" placeholder="Rechercher une balise..." onkeyup="filterTable()">
+            </div>
+        </div>
+        
+        <div class="table-wrapper">
+            <table id="htmlTable">
+                <thead>
+                    <tr>
+                        <th>Balise</th>
+                        <th>Fonction</th>
+                        <th>Exemple</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>&lt;html&gt;</td><td>Définit le début et la fin d'un document HTML</td><td><span class="tag-example">&lt;html&gt;...&lt;/html&gt;</span></td></tr>
+                    <tr><td>&lt;head&gt;</td><td>Contient les métadonnées du document</td><td><span class="tag-example">&lt;head&gt;...&lt;/head&gt;</span></td></tr>
+                    <tr><td>&lt;title&gt;</td><td>Définit le titre de la page dans l'onglet</td><td><span class="tag-example">&lt;title&gt;Ma Page&lt;/title&gt;</span></td></tr>
+                    <tr><td>&lt;meta&gt;</td><td>Définit les métadonnées (encodage, viewport)</td><td><span class="tag-example">&lt;meta charset="UTF-8"&gt;</span></td></tr>
+                    <tr><td>&lt;link&gt;</td><td>Lie des fichiers externes (CSS, icônes)</td><td><span class="tag-example">&lt;link rel="stylesheet" href="styles.css"&gt;</span></td></tr>
+                    <tr><td>&lt;body&gt;</td><td>Contient le contenu principal de la page</td><td><span class="tag-example">&lt;body&gt;...&lt;/body&gt;</span></td></tr>
+                    <tr><td>&lt;header&gt;</td><td>Section d'en-tête de la page ou d'une section</td><td><span class="tag-example">&lt;header&gt;Logo et navigation&lt;/header&gt;</span></td></tr>
+                    <tr><td>&lt;nav&gt;</td><td>Définit une zone de navigation</td><td><span class="tag-example">&lt;nav&gt;Liens...&lt;/nav&gt;</span></td></tr>
+                    <tr><td>&lt;main&gt;</td><td>Contenu principal du document</td><td><span class="tag-example">&lt;main&gt;Contenu...&lt;/main&gt;</span></td></tr>
+                    <tr><td>&lt;section&gt;</td><td>Définit une section thématique</td><td><span class="tag-example">&lt;section&gt;Section...&lt;/section&gt;</span></td></tr>
+                    <tr><td>&lt;article&gt;</td><td>Contenu autonome (article, post)</td><td><span class="tag-example">&lt;article&gt;Article...&lt;/article&gt;</span></td></tr>
+                    <tr><td>&lt;aside&gt;</td><td>Contenu secondaire (barre latérale)</td><td><span class="tag-example">&lt;aside&gt;Info complémentaire&lt;/aside&gt;</span></td></tr>
+                    <tr><td>&lt;footer&gt;</td><td>Pied de page du document ou d'une section</td><td><span class="tag-example">&lt;footer&gt;Copyright...&lt;/footer&gt;</span></td></tr>
+                    <tr><td>&lt;h1&gt; à &lt;h6&gt;</td><td>Titres et sous-titres (h1 = plus important)</td><td><span class="tag-example">&lt;h1&gt;Titre principal&lt;/h1&gt;</span></td></tr>
+                    <tr><td>&lt;p&gt;</td><td>Paragraphe de texte</td><td><span class="tag-example">&lt;p&gt;Texte...&lt;/p&gt;</span></td></tr>
+                    <tr><td>&lt;a&gt;</td><td>Lien hypertexte</td><td><span class="tag-example">&lt;a href="..."&gt;Lien&lt;/a&gt;</span></td></tr>
+                    <tr><td>&lt;img&gt;</td><td>Affiche une image</td><td><span class="tag-example">&lt;img src="image.jpg" alt="..."&gt;</span></td></tr>
+                    <tr><td>&lt;ul&gt;</td><td>Liste non ordonnée</td><td><span class="tag-example">&lt;ul&gt;&lt;li&gt;Item&lt;/li&gt;&lt;/ul&gt;</span></td></tr>
+                    <tr><td>&lt;ol&gt;</td><td>Liste ordonnée</td><td><span class="tag-example">&lt;ol&gt;&lt;li&gt;Item&lt;/li&gt;&lt;/ol&gt;</span></td></tr>
+                    <tr><td>&lt;li&gt;</td><td>Élément d'une liste</td><td><span class="tag-example">&lt;li&gt;Élément&lt;/li&gt;</span></td></tr>
+                    <tr><td>&lt;table&gt;</td><td>Définit un tableau</td><td><span class="tag-example">&lt;table&gt;...&lt;/table&gt;</span></td></tr>
+                    <tr><td>&lt;tr&gt;</td><td>Définit une ligne de tableau</td><td><span class="tag-example">&lt;tr&gt;...&lt;/tr&gt;</span></td></tr>
+                    <tr><td>&lt;td&gt;</td><td>Définit une cellule de tableau</td><td><span class="tag-example">&lt;td&gt;Donnée&lt;/td&gt;</span></td></tr>
+                    <tr><td>&lt;th&gt;</td><td>Définit une cellule d'en-tête de tableau</td><td><span class="tag-example">&lt;th&gt;En-tête&lt;/th&gt;</span></td></tr>
+                    <tr><td>&lt;form&gt;</td><td>Définit un formulaire</td><td><span class="tag-example">&lt;form&gt;...&lt;/form&gt;</span></td></tr>
+                    <tr><td>&lt;input&gt;</td><td>Champ de saisie dans un formulaire</td><td><span class="tag-example">&lt;input type="text"&gt;</span></td></tr>
+                    <tr><td>&lt;label&gt;</td><td>Étiquette pour un champ de formulaire</td><td><span class="tag-example">&lt;label for="nom"&gt;Nom&lt;/label&gt;</span></td></tr>
+                    <tr><td>&lt;button&gt;</td><td>Bouton cliquable</td><td><span class="tag-example">&lt;button&gt;Valider&lt;/button&gt;</span></td></tr>
+                    <tr><td>&lt;textarea&gt;</td><td>Zone de texte multilignes</td><td><span class="tag-example">&lt;textarea&gt;...&lt;/textarea&gt;</span></td></tr>
+                    <tr><td>&lt;select&gt;</td><td>Liste déroulante</td><td><span class="tag-example">&lt;select&gt;...&lt;/select&gt;</span></td></tr>
+                    <tr><td>&lt;option&gt;</td><td>Option d'une liste déroulante</td><td><span class="tag-example">&lt;option value="1"&gt;Option&lt;/option&gt;</span></td></tr>
+                    <tr><td>&lt;br&gt;</td><td>Saut de ligne</td><td><span class="tag-example">Ligne 1&lt;br&gt;Ligne 2</span></td></tr>
+                    <tr><td>&lt;hr&gt;</td><td>Ligne horizontale de séparation</td><td><span class="tag-example">&lt;hr&gt;</span></td></tr>
+                    <tr><td>&lt;strong&gt;</td><td>Texte important (gras)</td><td><span class="tag-example">&lt;strong&gt;Important&lt;/strong&gt;</span></td></tr>
+                    <tr><td>&lt;em&gt;</td><td>Texte mis en emphase (italique)</td><td><span class="tag-example">&lt;em&gt;Emphase&lt;/em&gt;</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Ndeye Diegui Diedhiou - Tous droits réservés</p>
+            <div class="footer-links">
+                <a href="index.html"><i class="fas fa-home"></i> Accueil</a>
+                <a href="../Capstone1/Homepage.html"><i class="fas fa-project-diagram"></i> Capstone1</a>
+                <a href="../Capstone2/home.html"><i class="fas fa-tools"></i> Capstone2</a>
+                <a href="emploi du temps.html"><i class="fas fa-calendar"></i> Emploi du temps</a>
+                <a href="tableau.html"><i class="fas fa-table"></i> Tableau des balises</a>
+                <a href="CV.html"><i class="fas fa-file-alt"></i> CV</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Typed.js animation
+        let typed = new Typed('.auto-typing', {
+            strings: ['html', 'head', 'title', 'body', 'h1/h6', 'p', 'table', 'form', 'input', 'button', 'a', 'img', 'ul/ol', 'li', 'div', 'span', 'section', 'article', 'aside', 'nav', 'footer', 'header'],
+            typeSpeed: 100,
+            startDelay: 500,
+            backSpeed: 80,
+            loop: true,
+            shuffle: true,
+            cursorChar: '|',
+        });
+        
+        // Gestion du thème
+        const themeSelect = document.getElementById('theme-select');
+        const root = document.documentElement;
+
+        function applyTheme(theme) {
+            if (theme === 'auto') {
+                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    root.setAttribute('data-theme', 'dark');
+                } else {
+                    root.removeAttribute('data-theme');
+                }
+            } else {
+                root.setAttribute('data-theme', theme);
+            }
+        }
+
+        // Appliquer le thème sauvegardé ou auto
+        const savedTheme = localStorage.getItem('theme') || 'auto';
+        themeSelect.value = savedTheme;
+        applyTheme(savedTheme);
+
+        themeSelect.addEventListener('change', () => {
+            localStorage.setItem('theme', themeSelect.value);
+            applyTheme(themeSelect.value);
+        });
+
+        // Fonction de recherche
+        function filterTable() {
+            const searchInput = document.getElementById('search').value.toLowerCase();
+            const table = document.getElementById('htmlTable');
+            const rows = table.getElementsByTagName('tr');
+
+            for (let i = 1; i < rows.length; i++) {
+                const cells = rows[i].getElementsByTagName('td');
+                let match = false;
+
+                for (let j = 0; j < cells.length; j++) {
+                    if (cells[j].innerText.toLowerCase().includes(searchInput)) {
+                        match = true;
+                        break;
+                    }
+                }
+
+                rows[i].style.display = match ? '' : 'none';
+            }
+        }
+
+        // Animation au défilement
+        document.addEventListener('DOMContentLoaded', function() {
+            const table = document.querySelector('.table-wrapper');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        table.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                        table.style.opacity = '0';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            table.style.opacity = '0';
+            table.style.transform = 'translateY(20px)';
+            table.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            observer.observe(table);
+        });
+    </script>
+</body>
+</html>

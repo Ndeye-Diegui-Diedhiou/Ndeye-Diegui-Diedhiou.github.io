@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friendship Zone - Registration</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #5e35b1;
+            --accent: #ffb300;
+            --accent2: #ff6f00;
+            --bg: #f8fafc;
+            --text: #222;
+            --light: #fff;
+            --dark: #111;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --border: #e0e7ef;
+            --success: #4caf50;
+            --error: #f44336;
+        }
+
+        [data-theme="dark"] {
+            --primary: #211166;
+            --accent: #ffd166;
+            --accent2: #ff8800;
+            --bg: #121212;
+            --text: #f3f3f3;
+            --light: #232b39;
+            --dark: #f3f3f3;
+            --card-bg: rgba(35, 43, 57, 0.95);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            --border: #232b39;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+            background: linear-gradient(135deg, rgba(94, 53, 177, 0.1) 0%, rgba(255, 179, 0, 0.1) 100%);
+            color: var(--text);
+            min-height: 100vh;
+            transition: background 0.5s, color 0.5s;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .top-nav {
+            background: var(--primary);
+            padding: 15px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            height: 60px;
+            width: auto;
+            border-radius: 10px;
+            object-fit: cover;
+            border: 2px solid var(--accent);
+        }
+
+        .nav-title {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 12px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a.active {
+            background: var(--accent2);
+            color: white;
+        }
+
+        .menu-icon {
+            display: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Theme toggle */
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .theme-toggle label {
+            color: white;
+            font-weight: 500;
+        }
+
+        .theme-toggle select {
+            padding: 6px 12px;
+            border-radius: 6px;
+            border: 1px solid #cfd8dc;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .theme-toggle select:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Main Content */
+        .registration-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .registration-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .registration-header h1 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .registration-header h1::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--accent2);
+            border-radius: 2px;
+        }
+
+        .registration-header p {
+            max-width: 600px;
+            margin: 25px auto 0;
+            font-size: 1.1rem;
+            color: var(--text);
+        }
+
+        /* Registration Form */
+        .registration-form {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-group label i {
+            color: var(--accent2);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            font-size: 1rem;
+            background: transparent;
+            color: var(--text);
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--accent2);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 111, 0, 0.2);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .form-options {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .option-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .option-group label {
+            margin-bottom: 0;
+            font-weight: 500;
+        }
+
+        input[type="radio"],
+        input[type="checkbox"] {
+            accent-color: var(--accent2);
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .file-upload {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .file-upload-btn {
+            background: rgba(94, 53, 177, 0.1);
+            color: var(--primary);
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px dashed var(--border);
+            width: 100%;
+            text-align: center;
+        }
+
+        .file-upload-btn:hover {
+            background: rgba(94, 53, 177, 0.2);
+            border-color: var(--accent2);
+        }
+
+        .file-upload input[type="file"] {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .file-name {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: var(--text);
+            opacity: 0.8;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 20px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .form-btn {
+            flex: 1;
+            min-width: 200px;
+            padding: 16px;
+            border-radius: 10px;
+            border: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent2) 100%);
+            color: white;
+            box-shadow: 0 5px 15px rgba(94, 53, 177, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(94, 53, 177, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(94, 53, 177, 0.1);
+        }
+
+        .form-footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 0.95rem;
+            color: var(--text);
+        }
+
+        .form-footer a {
+            color: var(--accent2);
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Password strength meter */
+        .password-strength {
+            height: 6px;
+            background: #ddd;
+            border-radius: 3px;
+            margin-top: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .password-strength-meter {
+            height: 100%;
+            width: 0;
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        .strength-0 { width: 20%; background: var(--error); }
+        .strength-1 { width: 40%; background: #ff9800; }
+        .strength-2 { width: 60%; background: #ffc107; }
+        .strength-3 { width: 80%; background: #8bc34a; }
+        .strength-4 { width: 100%; background: var(--success); }
+
+        .strength-text {
+            font-size: 0.85rem;
+            margin-top: 5px;
+            text-align: right;
+            font-weight: 500;
+        }
+
+        .strength-0 .strength-text { color: var(--error); }
+        .strength-1 .strength-text { color: #ff9800; }
+        .strength-2 .strength-text { color: #ffc107; }
+        .strength-3 .strength-text { color: #8bc34a; }
+        .strength-4 .strength-text { color: var(--success); }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 40px 0;
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--accent2);
+        }
+
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .contact-item i {
+            color: var(--accent2);
+            font-size: 1.2rem;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                right: 0;
+                background: var(--primary);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+                z-index: 1000;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .menu-icon {
+                display: block;
+            }
+            
+            .registration-header h1 {
+                font-size: 2rem;
+            }
+            
+            .registration-form {
+                padding: 30px 20px;
+            }
+            
+            .form-actions {
+                flex-direction: column;
+            }
+            
+            .form-btn {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .registration-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="top-nav">
+        <div class="nav-container">
+            <div class="logo-container">
+                <img src="FRIENDSHIP (5).png" alt="FriendshipZone Logo" class="logo">
+                <div class="nav-title">Friendship Zone</div>
+            </div>
+            <div class="nav-links">
+                <a href="../index.html"><i class="fas fa-project-diagram"></i> Landing Page</a>
+                <a href="FriendList.html"><i class="fas fa-users"></i> Friends</a>
+                <a href="Homepage.html" class="active"><i class="fas fa-home"></i> Home</a>
+                <a href="../Capstone2/home.html"><i class="fas fa-laptop-code"></i> Capstone2</a>
+            </div>
+            <div class="nav-right">
+                <div class="theme-toggle">
+                    <label for="theme-select">Theme:</label>
+                    <select id="theme-select">
+                        <option value="auto">Auto</option>
+                        <option value="light">Light</option>
+                        <option value="dark">Dark</option>
+                    </select>
+                </div>
+                <div class="menu-icon">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Registration Section -->
+    <div class="registration-container">
+        <div class="registration-header">
+            <h1>Join Our Community</h1>
+            <p>Create your account and start connecting with amazing people across Africa</p>
+        </div>
+        
+        <form class="registration-form" id="registrationForm">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="firstName"><i class="fas fa-user"></i> First Name</label>
+                    <input type="text" id="firstName" class="form-control" placeholder="Enter your first name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="lastName"><i class="fas fa-user"></i> Last Name</label>
+                    <input type="text" id="lastName" class="form-control" placeholder="Enter your last name" required>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="email"><i class="fas fa-envelope"></i> Email Address</label>
+                <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="password"><i class="fas fa-lock"></i> Password</label>
+                    <input type="password" id="password" class="form-control" placeholder="Create a password" required>
+                    <div class="password-strength">
+                        <div class="password-strength-meter" id="passwordStrength"></div>
+                    </div>
+                    <div class="strength-text" id="strengthText">Weak password</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirmPassword"><i class="fas fa-lock"></i> Confirm Password</label>
+                    <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm your password" required>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="birthdate"><i class="fas fa-calendar"></i> Date of Birth</label>
+                    <input type="date" id="birthdate" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label><i class="fas fa-venus-mars"></i> Gender</label>
+                    <div class="form-options">
+                        <div class="option-group">
+                            <input type="radio" id="male" name="gender" value="male" required>
+                            <label for="male">Male</label>
+                        </div>
+                        <div class="option-group">
+                            <input type="radio" id="female" name="gender" value="female" required>
+                            <label for="female">Female</label>
+                        </div>
+                        <div class="option-group">
+                            <input type="radio" id="other" name="gender" value="other" required>
+                            <label for="other">Other</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="country"><i class="fas fa-globe-africa"></i> Country</label>
+                <select id="country" class="form-control" required>
+                    <option value="">Select your country</option>
+                    <option value="Senegal">Senegal</option>
+                    <option value="Mali">Mali</option>
+                    <option value="Ivory Coast">Ivory Coast</option>
+                    <option value="Gambia">Gambia</option>
+                    <option value="Ghana">Ghana</option>
+                    <option value="Nigeria">Nigeria</option>
+                    <option value="Cameroon">Cameroon</option>
+                    <option value="South Africa">South Africa</option>
+                    <option value="Kenya">Kenya</option>
+                    <option value="Tanzania">Tanzania</option>
+                    <option value="Ethiopia">Ethiopia</option>
+                    <option value="Morocco">Morocco</option>
+                    <option value="Algeria">Algeria</option>
+                    <option value="Tunisia">Tunisia</option>
+                    <option value="Egypt">Egypt</option>
+                    <option value="Uganda">Uganda</option>
+                    <option value="Rwanda">Rwanda</option>
+                    <option value="Zimbabwe">Zimbabwe</option>
+                    <option value="Zambia">Zambia</option>
+                    <option value="Botswana">Botswana</option>
+                    <option value="Namibia">Namibia</option>
+                    <option value="Mozambique">Mozambique</option>
+                    <option value="Angola">Angola</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="phone"><i class="fas fa-phone"></i> Phone Number</label>
+                <input type="tel" id="phone" class="form-control" placeholder="Enter your phone number" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="interests"><i class="fas fa-heart"></i> Interests</label>
+                <textarea id="interests" class="form-control" placeholder="Describe your hobbies and interests" rows="3"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label><i class="fas fa-handshake"></i> Looking For</label>
+                <div class="form-options">
+                    <div class="option-group">
+                        <input type="checkbox" id="friendship" name="lookingFor" value="friendship">
+                        <label for="friendship">Friendship</label>
+                    </div>
+                    <div class="option-group">
+                        <input type="checkbox" id="dating" name="lookingFor" value="dating">
+                        <label for="dating">Dating</label>
+                    </div>
+                    <div class="option-group">
+                        <input type="checkbox" id="networking" name="lookingFor" value="networking">
+                        <label for="networking">Networking</label>
+                    </div>
+                    <div class="option-group">
+                        <input type="checkbox" id="travel" name="lookingFor" value="travel">
+                        <label for="travel">Travel Partners</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="profilePhoto"><i class="fas fa-camera"></i> Profile Photo</label>
+                <div class="file-upload">
+                    <div class="file-upload-btn">
+                        <i class="fas fa-cloud-upload-alt"></i> Choose a photo
+                    </div>
+                    <input type="file" id="profilePhoto" accept="image/*">
+                </div>
+                <div class="file-name" id="fileName">No file chosen</div>
+            </div>
+            
+            <div class="form-group">
+                <div class="option-group">
+                    <input type="checkbox" id="terms" name="terms" required>
+                    <label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+                </div>
+            </div>
+            
+            <div class="form-actions">
+                <button type="submit" class="form-btn btn-primary">
+                    <i class="fas fa-user-plus"></i> Create Account
+                </button>
+                <button type="button" class="form-btn btn-secondary" id="adminBtn">
+                    <i class="fas fa-user-shield"></i> Register as Admin
+                </button>
+            </div>
+            
+            <div class="form-footer">
+                Already have an account? <a href="Login.html">Sign in here</a>
+            </div>
+        </form>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Friendship Zone</h3>
+                <p>The community that connects Africa through authentic and lasting friendships.</p>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="FriendList.html"><i class="fas fa-users"></i> Friends</a></li>
+                    <li><a href="RegistrationzForm.html"><i class="fas fa-user-plus"></i> Sign Up</a></li>
+                    <li><a href="#"><i class="fas fa-info-circle"></i> About</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>supportfriendship@gmail.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Dakar, Senegal</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2025 Friendship Zone. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Theme management
+        const themeSelect = document.getElementById('theme-select');
+        const root = document.documentElement;
+
+        function applyTheme(theme) {
+            if (theme === 'auto') {
+                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    root.setAttribute('data-theme', 'dark');
+                } else {
+                    root.removeAttribute('data-theme');
+                }
+            } else {
+                root.setAttribute('data-theme', theme);
+            }
+        }
+
+        // Apply saved or auto theme
+        const savedTheme = localStorage.getItem('theme') || 'auto';
+        themeSelect.value = savedTheme;
+        applyTheme(savedTheme);
+
+        themeSelect.addEventListener('change', () => {
+            localStorage.setItem('theme', themeSelect.value);
+            applyTheme(themeSelect.value);
+        });
+
+        // Menu mobile toggle
+        const menuIcon = document.querySelector('.menu-icon');
+        const navLinks = document.querySelector('.nav-links');
+        
+        menuIcon.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Password strength indicator
+        const passwordInput = document.getElementById('password');
+        const passwordStrength = document.getElementById('passwordStrength');
+        const strengthText = document.getElementById('strengthText');
+        
+        passwordInput.addEventListener('input', function() {
+            const password = this.value;
+            let strength = 0;
+            
+            // Check password length
+            if (password.length >= 8) strength += 1;
+            if (password.length >= 12) strength += 1;
+            
+            // Check for mixed case
+            if (password.match(/([a-z].*[A-Z])|([A-Z].*[a-z])/)) strength += 1;
+            
+            // Check for numbers
+            if (password.match(/([0-9])/)) strength += 1;
+            
+            // Check for special characters
+            if (password.match(/([!,@,#,$,%,^,&,*,?,_,~])/)) strength += 1;
+            
+            // Update strength meter
+            passwordStrength.className = 'password-strength-meter strength-' + strength;
+            
+            // Update text
+            const strengthMessages = [
+                'Very weak',
+                'Weak',
+                'Medium',
+                'Strong',
+                'Very strong'
+            ];
+            strengthText.textContent = strengthMessages[strength];
+        });
+
+        // File upload display
+        const fileInput = document.getElementById('profilePhoto');
+        const fileName = document.getElementById('fileName');
+        
+        fileInput.addEventListener('change', function() {
+            if (this.files.length > 0) {
+                fileName.textContent = this.files[0].name;
+            } else {
+                fileName.textContent = 'No file chosen';
+            }
+        });
+
+        // Form validation
+        const registrationForm = document.getElementById('registrationForm');
+        const confirmPassword = document.getElementById('confirmPassword');
+        
+        registrationForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Check if passwords match
+            if (passwordInput.value !== confirmPassword.value) {
+                alert('Passwords do not match!');
+                confirmPassword.focus();
+                return false;
+            }
+            
+            // Check if at least one interest is selected
+            const interests = document.querySelectorAll('input[name="lookingFor"]:checked');
+            if (interests.length === 0) {
+                alert('Please select at least one interest!');
+                return false;
+            }
+            
+            // Check if terms are accepted
+            if (!document.getElementById('terms').checked) {
+                alert('You must agree to the Terms of Service and Privacy Policy!');
+                return false;
+            }
+            
+            // Show success message
+            alert('Registration successful! Welcome to Friendship Zone.');
+            
+            // In a real application, you would submit the form here
+            // For now, we'll just reset the form
+            registrationForm.reset();
+            fileName.textContent = 'No file chosen';
+            passwordStrength.className = 'password-strength-meter strength-0';
+            strengthText.textContent = 'Weak password';
+        });
+
+        // Admin button
+        document.getElementById('adminBtn').addEventListener('click', function() {
+            alert('Admin registration requires special privileges. Please contact support.');
+        });
+    </script>
+</body>
+</html>

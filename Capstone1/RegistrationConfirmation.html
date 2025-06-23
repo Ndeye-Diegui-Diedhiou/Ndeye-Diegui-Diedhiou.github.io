@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friendship Zone - Registration Confirmation</title>
+    <link rel="stylesheet" href="projet cc/styles.css">
+    <style>
+        /* Adapted and improved CSS for RegistrationConfirmation.html - professional, modern, and responsive */
+
+        :root {
+            --main: #22304a;
+            --accent: cadetblue;
+            --accent2: rgb(55, 173, 177);
+            --bg: #f7f9fb;
+            --card: #fff;
+            --border: #e0e6ed;
+            --radius: 16px;
+            --shadow: 0 4px 24px rgba(34,48,74,0.09);
+            --transition: 0.2s cubic-bezier(.4,0,.2,1);
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: var(--bg);
+            color: var(--main);
+            min-height: 100vh;
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color var(--transition);
+        }
+        a:hover {
+            color: var(--accent2);
+        }
+
+        /* Header & Navigation */
+        .main-nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin-top: 12px;
+        }
+        .banner-img {
+            height: 70px;
+            width: auto;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(34,48,74,0.10);
+            background: #fff;
+        }
+        .brand-name h1 {
+            margin: 0;
+            color: #141414;
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 8px rgba(34,48,74,0.13);
+        }
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            margin: 18px 0 0 0;
+            padding: 0;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+        .nav-link {
+            color: #2a2a2a;
+            font-weight: 500;
+            font-size: 1.1em;
+            border-radius: 8px;
+            padding: 8px 18px;
+            transition: background var(--transition), color var(--transition);
+        }
+        .nav-link:hover, .nav-link.active {
+            background: linear-gradient(90deg, var(--accent), var(--accent2));
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(255,126,95,0.10);
+        }
+        .menu-toggle {
+            display: none;
+            font-size: 2em;
+            background: none;
+            border: none;
+            color: #2a2929;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        /* Confirmation Section */
+        .intro-section {
+            background: var(--card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 40px 36px 36px 36px;
+            margin: 40px auto 32px auto;
+            max-width: 500px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .intro-section img {
+            max-width: 180px;
+            margin-bottom: 24px;
+            border-radius: 16px;
+            box-shadow: 0 2px 12px rgba(34,48,74,0.10);
+        }
+        .intro-section h1 {
+            color: var(--accent);
+            margin-bottom: 0.5em;
+            font-size: 2em;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        .intro-section h3 {
+            color: var(--main);
+            font-weight: 500;
+            margin-bottom: 0.7em;
+            font-size: 1.15em;
+        }
+        .intro-section p {
+            font-size: 1.1em;
+            margin: 24px 0 0 0;
+            color: #444;
+        }
+        .cta-link {
+            display: inline-block;
+            margin-top: 32px;
+            background: linear-gradient(90deg, var(--accent), var(--accent2));
+            color: #212121;
+            padding: 14px 36px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.08em;
+            transition: background var(--transition), color var(--transition), box-shadow var(--transition);
+            box-shadow: 0 2px 8px rgba(34,48,74,0.10);
+            text-decoration: none;
+            letter-spacing: 0.5px;
+        }
+        .cta-link:hover {
+            background: var(--main);
+            color: #030303;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--main);
+            color: #0b0b0b;
+            padding: 28px 0 10px 0;
+            text-align: center;
+            margin-top: 32px;
+            border-top-left-radius: var(--radius);
+            border-top-right-radius: var(--radius);
+            box-shadow: var(--shadow);
+            font-size: 1.05em;
+        }
+        .footer-links a {
+            color: #030303;
+            margin-right: 20px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color var(--transition);
+        }
+        .footer-links a:hover {
+            color: var(--accent2);
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 700px) {
+            .intro-section {
+                padding: 18px 6px 18px 6px;
+                max-width: 95vw;
+            }
+            .intro-section img {
+                max-width: 120px;
+            }
+        }
+        @media (max-width: 500px) {
+            .brand-name h1 {
+                font-size: 1.3rem;
+            }
+            .intro-section h1 {
+                font-size: 1.3em;
+            }
+            .cta-link {
+                padding: 10px 18px;
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="main-nav">
+        <div class="logo-container">
+            <img src="FRIENDSHIP (5).png" alt="FriendshipZone Logo" class="banner-img" style="max-width:80px;">
+            <div class="brand-name"><h1>Friendship Zone</h1></div>
+        </div>
+        <button class="menu-toggle" aria-label="Menu">&#9776;</button>
+        <ul class="nav-links">
+            <li><a href="projet cc/index.html" class="nav-link">Landing Page</a></li>
+            <li><a href="projet cc/Registration.html" class="nav-link">Register</a></li>
+            <li><a href="Homepage.html" class="nav-link">Home</a></li>
+            <li><a href="FriendList.html" class="nav-link">My Friends</a></li>
+        </ul>
+    </nav>
+    <main>
+        <section class="intro-section" style="max-width:500px;margin:40px auto 0 auto;text-align:center;">
+            <img src="ChatGPT Image 17 avr. 2025, 11_21_29.png" alt="Confirmation" style="max-width:180px; margin-bottom:24px; border-radius:16px; box-shadow:0 2px 12px rgba(34,48,74,0.10);">
+            <h1 style="color:var(--accent);margin-bottom:0.5em;">Registration Confirmed!</h1>
+            <h3 style="color:var(--main);font-weight:500;">Thank you for registering with Friendship Zone.</h3>
+            <p style="font-size:1.1em;margin:24px 0 0 0;">Your account has been successfully created.<br>
+            If you have any questions, feel free to reach out to our support team.</p>
+            <a href="Homepage.html" class="cta-link" style="margin-top:32px;display:inline-block;">Go to Home</a>
+        </section>
+    </main>
+    <footer>
+        <div class="footer-links">
+            <a href="#">Legal notice</a>
+            <a href="#">Privacy policy</a>
+        </div>
+        <div>&copy; 2025 Friendship Zone. All rights reserved.</div>
+    </footer>
+    <script src="projet cc/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Responsive navigation menu (burger)
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navLinks = document.querySelector('.nav-links');
+            if(menuToggle && navLinks) {
+                menuToggle.onclick = () => navLinks.classList.toggle('show');
+            }
+        });
+    </script>
+</body>
+</html>

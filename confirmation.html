@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Message envoyé</title>
+    <style>
+        :root {
+            --primary: #a4508b;         /* Violet rosé élégant */
+            --accent: #f9d1d1;          /* Rose pâle */
+            --accent2: #ff7eb9;         /* Rose vif */
+            --accent3: #ffe6fa;         /* Lavande pastel */
+            --gold: #ffd6a5;            /* Doré doux */
+            --bg: #fff0f6;              /* Fond rose très clair */
+            --text: #3d2c3c;            /* Brun doux */
+            --light: #fff7fb;           /* Blanc rosé */
+            --dark: #6d466b;            /* Violet foncé */
+            --card-bg: linear-gradient(135deg, #fff7fb 80%, #ffe6fa 100%);
+            --shadow: 0 10px 30px rgba(164, 80, 139, 0.08);
+        }
+
+        [data-theme="dark"] {
+            --primary: #6d466b;
+            --accent: #f9d1d1;
+            --accent2: #ff7eb9;
+            --accent3: #a4508b;
+            --gold: #ffd6a5;
+            --bg: #2d142c;
+            --text: #ffe6f7;
+            --light: #3d2c3c;
+            --dark: #fff0f6;
+            --card-bg: linear-gradient(135deg, #3d2c3c 80%, #6d466b 100%);
+            --shadow: 0 10px 30px rgba(255, 126, 185, 0.15);
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+            background: linear-gradient(135deg, var(--bg) 0%, var(--accent3) 100%);
+            color: var(--text);
+            min-height: 100vh;
+            margin: 0;
+            transition: background 0.5s, color 0.5s;
+        }
+
+        .confirmation {
+            background: #d4edda;
+            color: #155724;
+            padding: 40px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            font-size: 1.2rem;
+        }
+
+        .footer-text {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        /* Exemple pour les cartes ou blocs */
+        .card, .confirmation, .table-container, .form-container {
+            background: var(--card-bg);
+            color: var(--text);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 32px;
+            margin: 24px auto;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        /* Boutons */
+        button, .btn {
+            background: linear-gradient(90deg, var(--accent2), var(--gold));
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 10px 24px;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(255, 126, 185, 0.15);
+            transition: background 0.3s, color 0.3s;
+        }
+        button:hover, .btn:hover {
+            background: linear-gradient(90deg, var(--gold), var(--accent2));
+            color: var(--primary);
+        }
+
+        /* Pour les tableaux */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--card-bg);
+            color: var(--text);
+            box-shadow: var(--shadow);
+        }
+        th, td {
+            border: 1px solid var(--accent3);
+            padding: 12px;
+            text-align: center;
+        }
+        th {
+            background: var(--accent);
+            color: var(--primary);
+        }
+        tr:nth-child(even) {
+            background: var(--light);
+        }
+
+        /* Titres */
+        h1, h2, h3 {
+            color: var(--primary);
+            text-shadow: 0 2px 8px var(--accent3);
+        }
+
+        /* Liens */
+        a {
+            color: var(--accent2);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        a:hover {
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <main>
+    <div class="confirmation">
+        ✅ Merci ! Votre message a été envoyé avec succès.<br>
+        Nous vous répondrons dans les plus brefs délais.
+    </div>
+    </main>
+    <script>
+        setTimeout(() => {
+            window.location.href = "formulaire.html";
+        }, 5000);
+    </script>
+</body>
+</html>

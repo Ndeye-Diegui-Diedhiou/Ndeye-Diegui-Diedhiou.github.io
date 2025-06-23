@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Réservation - AutoMob-Mechanic</title>
+    <link rel="stylesheet" href="capstone2.css">
+</head>
+<body>
+    <header>
+        <div class="header-top">
+            <a href="home.html"><img src="FRIENDSHIP (3).png" alt="AutoMob-Mechanic Logo" class="logo"></a>
+            <h3><a href="home.html" class="site-title">AutoMob-Mechanic</a></h3>
+            <nav class="main-nav">
+                <a href="home.html">Home</a> |
+                <a href="services.html">Services</a> |
+                <a href="booking.html">Booking</a> |
+                <a href="mailto:contact@automob.co.in">contact@automob.co.in 📧</a> |
+                <a href="number"> 999 999 9999 ☎️</a>
+            </nav>
+        </div>
+    
+    <div class="theme-toggle">
+        <label for="theme-select">Thème :</label>
+        <select id="theme-select">
+            <option value="auto">Automatique</option>
+            <option value="light">Clair</option>
+            <option value="dark">Sombre</option>
+        </select>
+</div>
+    </header>
+    <main>
+        <section class="service-detail">
+            <h1>Réservez un service</h1>
+            <p>Remplissez le formulaire ci-dessous pour réserver un service automobile chez AutoMob-Mechanic.</p>
+            <form action="booking-succes.html" method="post" class="booking-form">
+                <label for="name">Nom complet</label>
+                <input type="text" id="name" name="name" required>
+                <label for="service">Service souhaité</label>
+                <select id="service" name="service" required>
+                    <option value="">Choisir un service</option>
+                    <option value="entretien">Entretien général</option>
+                    <option value="mecanique">Réparation mécanique</option>
+                    <option value="diagnostic">Diagnostic électronique</option>
+                    <option value="carrosserie">Carrosserie & Peinture</option>
+                    <option value="controle">Pré-contrôle technique</option>
+                </select>
+                <label for="date">Date souhaitée</label>
+                <input type="date" id="date" name="date" required>
+                <button type="submit" href="booking-succes.html" class="button">Réserver</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <div class="footer-content">
+            <span>&copy; 2025 AutoMob-Mechanic. Tous droits réservés.</span>
+            <span>
+                <a href="mailto:contact@automob.co.in">Contact</a> |
+                <a href="services.html">Services</a> |
+                <a href="booking.html">Réservation</a>
+            </span>
+        </div>
+    </footer>
+    <script>
+const themeSelect = document.getElementById('theme-select');
+const root = document.documentElement;
+
+function applyTheme(theme) {
+    root.setAttribute('data-theme', theme);
+    if (theme === 'auto') {
+        root.removeAttribute('data-theme');
+    }
+}
+
+themeSelect.value = localStorage.getItem('theme') || 'auto';
+applyTheme(themeSelect.value);
+
+themeSelect.addEventListener('change', () => {
+    localStorage.setItem('theme', themeSelect.value);
+    applyTheme(themeSelect.value);
+});
+</script>
+</body>
+</html>

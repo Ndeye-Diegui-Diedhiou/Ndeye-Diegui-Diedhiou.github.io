@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Body Repair Service - Capstone2</title>
+    <link rel="stylesheet" href="capstone2.css">
+</head>
+<body>
+    <header>
+        <div class="header-top">
+            <h1><a href="home.html" class="site-title">AutoMob-Mechanic</a></h1>
+            <nav class="main-nav">
+                <a href="home.html">Home</a> |
+                <a href="services.html">Services</a> |
+                <a href="booking.html">Booking</a> |
+                <a href="mailto:contact@automob.co.in">contact@automob.co.in 📧</a> |
+                <span>999 999 9999 ☎️</span>
+            </nav>
+        </div>
+        <nav>
+            <a href="../projet front end/index.html" title="Accueil">
+                <img src="../projet front end/Logo de Ndeye Diegui Diedhiou.png" alt="Logo" class="logo">
+            </a>
+            <ul>
+                <li><a href="../projet front end/index.html">Accueil</a></li>
+                <li><a href="../Homepage.html">Capstone1</a></li>
+                <li><a href="home.html">Capstone2</a></li>
+                <li><a href="../projet front end/tableau.html">Tableau des balises</a></li>
+            </ul>
+            <img src="../projet front end/menu-removebg-preview.png" alt="Menu" class="menu-icon" title="Menu">
+        </nav>
+        <div class="theme-toggle">
+            <label for="theme-select">Thème :</label>
+            <select id="theme-select">
+                <option value="auto">Automatique</option>
+                <option value="light">Clair</option>
+                <option value="dark">Sombre</option>
+            </select>
+    </header>
+    <main>
+        <section class="text">
+            <h1><span class="auto-typing"></span></h1>
+            <p>Réparation carrosserie :</p>
+            <ul>
+                <li>Débosselage</li>
+                <li>Peinture</li>
+                <li>Remplacement de pièces</li>
+            </ul>
+        </section>
+    </main>
+    <div class="overlay"></div>
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script>
+        let typed = new Typed('.auto-typing', {
+            strings: ['Body Repair', 'Carrosserie', 'Réparation', 'Capstone2'],
+            typeSpeed: 100,
+            backSpeed: 100,
+            loop: true,
+            fadeOut: true,
+            fadeOutClass: 'typed-fade-out',
+            fadeOutDelay: 500,
+            shuffle: true,
+            cursorChar: '|',
+        });
+        const menuIcon = document.querySelector('.menu-icon');
+        const navUl = document.querySelector('nav ul');
+        if(menuIcon) {
+            menuIcon.addEventListener('click', () => {
+                navUl.classList.toggle('active');
+            });
+        }
+    </script>
+</body>
+</html>

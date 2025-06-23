@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friendship Zone</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <style>
+        :root {
+            --primary: #5e35b1;
+            --accent: #ffb300;
+            --accent2: #ff6f00;
+            --bg: #f8fafc;
+            --text: #222;
+            --light: #fff;
+            --dark: #111;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --border: #e0e7ef;
+        }
+
+        [data-theme="dark"] {
+            --primary: #211166;
+            --accent: #ffd166;
+            --accent2: #ff8800;
+            --bg: #121212;
+            --text: #f3f3f3;
+            --light: #232b39;
+            --dark: #f3f3f3;
+            --card-bg: rgba(35, 43, 57, 0.9);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            --border: #232b39;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            transition: background 0.5s, color 0.5s;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .top-nav {
+            background: var(--primary);
+            padding: 15px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            height: 70px;
+            width: auto;
+            border-radius: 10px;
+            object-fit: cover;
+            border: 2px solid var(--accent);
+        }
+
+        .nav-title {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 12px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a.active {
+            background: var(--accent2);
+            color: white;
+        }
+
+        .menu-icon {
+            display: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Theme toggle */
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .theme-toggle label {
+            color: white;
+            font-weight: 500;
+        }
+
+        .theme-toggle select {
+            padding: 6px 12px;
+            border-radius: 6px;
+            border: 1px solid #cfd8dc;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .theme-toggle select:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Hero section */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, rgba(94, 53, 177, 0.1) 0%, rgba(255, 179, 0, 0.1) 100%);
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-text {
+            padding: 30px;
+            background: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            animation: fadeInLeft 1s ease-out;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .auto-typing {
+            color: var(--accent2);
+            font-weight: 700;
+            min-height: 70px;
+            display: block;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: var(--text);
+            line-height: 1.8;
+        }
+
+        .cta-btn {
+            background: var(--accent2);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 14px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .cta-btn:hover {
+            background: var(--accent);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(255, 111, 0, 0.3);
+        }
+
+        .hero-image {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            animation: fadeInRight 1s ease-out;
+        }
+
+        .hero-image::before {
+            content: "";
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: var(--accent);
+            opacity: 0.2;
+            filter: blur(60px);
+            z-index: -1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .hero-img {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            transition: transform 0.5s ease;
+        }
+
+        .hero-img:hover {
+            transform: translateY(-10px);
+        }
+
+        /* Features section */
+        .features {
+            padding: 80px 20px;
+            background: rgba(255, 255, 255, 0.1);
+         -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            animation: fadeInLeft 1s ease-out;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header h2::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--accent2);
+            border-radius: 2px;
+        }
+
+        .section-header p {
+            max-width: 700px;
+            margin: 20px auto 0;
+            font-size: 1.1rem;
+            color: var(--text);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-card i {
+            font-size: 3rem;
+            color: var(--accent2);
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .feature-card p {
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        /* Carousel section */
+        .carousel-section {
+            padding: 80px 20px;
+        }
+
+        .carousel-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .carousel-track img {
+            width: 100%;
+            min-width: 100%;
+            height: 500px;
+            object-fit: cover;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            font-size: 2rem;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .carousel-btn:hover {
+            background: var(--accent2);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .prev {
+            left: 20px;
+        }
+
+        .next {
+            right: 20px;
+        }
+
+        .carousel-indicators {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .indicator.active {
+            background: var(--accent2);
+            transform: scale(1.3);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 40px 0;
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--accent2);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .contact-item i {
+            color: var(--accent2);
+            font-size: 1.2rem;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Loader */
+        #loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 6px solid rgba(255, 255, 255, 0.3);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Animations */
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .hero-text {
+                order: 2;
+            }
+            
+            .hero-image {
+                order: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                right: 0;
+                background: var(--primary);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+                z-index: 1000;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .menu-icon {
+                display: block;
+            }
+            
+            .hero-text h1 {
+                font-size: 2.8rem;
+            }
+            
+            .carousel-track img {
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-text h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-text p {
+                font-size: 1rem;
+            }
+            
+            .section-header h2 {
+                font-size: 2rem;
+            }
+            
+            .carousel-track img {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loader -->
+    <div id="loader">
+        <div class="spinner"></div>
+    </div>
+    
+    <!-- Navigation -->
+    <nav class="top-nav">
+        <div class="nav-container">
+            <div class="logo-container">
+                <img src="FRIENDSHIP (5).png" alt="FriendshipZone Logo" class="logo">
+                <div class="nav-title">Friendship Zone</div>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="active"><i class="fas fa-home"></i> Home</a>
+                <a href="FriendList.html"><i class="fas fa-users"></i> Friends</a>
+                <a href="RegistrationzForm.html"><i class="fas fa-user-plus"></i> Sign Up</a>
+                <a href="#"><i class="fas fa-info-circle"></i> About</a>
+            </div>
+            <div class="nav-right">
+                <div class="theme-toggle">
+                    <label for="theme-select">Theme:</label>
+                    <select id="theme-select">
+                        <option value="auto">Auto</option>
+                        <option value="light">Light</option>
+                        <option value="dark">Dark</option>
+                    </select>
+                </div>
+                <div class="menu-icon">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-text">
+                <h1><span class="auto-typing"></span></h1>
+                <p>
+                    You have just entered a space dedicated to kindness, authentic connections, 
+                    and relationships that truly matter. Here, no matter where you come from, what you love, 
+                    or who you are: you already belong to our community.
+                </p>
+                <button class="cta-btn" onclick="window.location.href='RegistrationForm.html'">
+                    <i class="fas fa-user-plus"></i> Join Now
+                </button>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
+                     alt="Friendship Zone" class="hero-img">
+            </div>
+        </div>
+    </section>
+    
+    <!-- Features section -->
+    <section class="features">
+        <div class="section-header">
+            <h2>Why Friendship Zone?</h2>
+            <p>Discover what makes our community unique and special</p>
+        </div>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <i class="fas fa-hands-helping"></i>
+                <h3>Caring Community</h3>
+                <p>A safe space where everyone is respected and valued for who they are.</p>
+            </div>
+            
+            <div class="feature-card">
+                <i class="fas fa-globe-africa"></i>
+                <h3>African Connections</h3>
+                <p>Meet people who share the same cultural values across Africa.</p>
+            </div>
+            
+            <div class="feature-card">
+                <i class="fas fa-music"></i>
+                <h3>Shared Passions</h3>
+                <p>Dance, music, travel – find friends who share your passions.</p>
+            </div>
+            
+            <div class="feature-card">
+                <i class="fas fa-heart"></i>
+                <h3>Authentic Relationships</h3>
+                <p>Create lasting bonds based on trust and mutual respect.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Carousel section -->
+    <section class="carousel-section">
+        <div class="section-header">
+            <h2>Friendship Moments</h2>
+            <p>Some captured moments from our vibrant community</p>
+        </div>
+        
+        <div class="carousel-container">
+            <button class="carousel-btn prev" title="Previous Slide"><i class="fas fa-chevron-left"></i></button>
+            <div class="carousel-track">
+                <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Friendship moment">
+                <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Community gathering">
+                <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Dancing friends">
+                <img src="annie-spratt-gq5PECP8pHE-unsplash.jpg" alt="Group celebration">
+                <img src="hannah-rodrigo-mf_3yZnC6ug-unsplash.jpg" alt="Community event">
+                <img src="womanizer-toys-8oB43mw658c-unsplash.jpg" alt="Friendship gathering">
+                <img src="melissa-askew-tSlvoSZK77c-unsplash.jpg" alt="Celebrating friendship">
+                <img src="kelly-sikkema-4le7k9XVYjE-unsplash.jpg" alt="Friends enjoying time together">
+                <img src="hannah-busing-Zyx1bK9mqmA-unsplash.jpg" alt="Friends enjoying time together">
+            </div>
+            <button class="carousel-btn next" title="Next Slide"><i class="fas fa-chevron-right"></i></button>
+            <div class="carousel-indicators"></div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Friendship Zone</h3>
+                <p>The community that connects Africa through authentic and lasting friendships.</p>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="FriendList.html"><i class="fas fa-users"></i> Friends</a></li>
+                    <li><a href="RegistrationzForm.html"><i class="fas fa-user-plus"></i> Sign Up</a></li>
+                    <li><a href="#"><i class="fas fa-info-circle"></i> About</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>supportfriendship@gmail.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Dakar, Senegal</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2025 Friendship Zone. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Loader
+        window.addEventListener("load", function(){
+            document.getElementById("loader").style.display = "none";
+        });
+        
+        // Typed.js animation
+        let typed = new Typed('.auto-typing', {
+            strings: [
+                "Welcome to FriendshipZone, The network that connects Africa",
+                "Nangu ci FriendshipZone, Réseau bi ñu jëfandikoo Afrik",
+                "Bienvenue sur FriendshipZone, Le réseau qui connecte l'Afrique",
+                "مرحبًا بكم في FriendshipZone، الشبكة التي تربط إفريقيا",
+                "Boyei na FriendshipZone, Réseau oyo ekangisi Afríka",
+                "Bienvenido a FriendshipZone, La red que conecta África",
+                "Bem-vindo/a ao FriendshipZone, A rede que conecta a África"
+            ],
+            typeSpeed: 50,
+            backSpeed: 30,
+            loop: true,
+            cursorChar: '|',
+        });
+        
+        // Menu mobile toggle
+        const menuIcon = document.querySelector('.menu-icon');
+        const navLinks = document.querySelector('.nav-links');
+        
+        menuIcon.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // Theme management
+        const themeSelect = document.getElementById('theme-select');
+        const root = document.documentElement;
+
+        function applyTheme(theme) {
+            if (theme === 'auto') {
+                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    root.setAttribute('data-theme', 'dark');
+                } else {
+                    root.removeAttribute('data-theme');
+                }
+            } else {
+                root.setAttribute('data-theme', theme);
+            }
+        }
+
+        // Apply saved or auto theme
+        const savedTheme = localStorage.getItem('theme') || 'auto';
+        themeSelect.value = savedTheme;
+        applyTheme(savedTheme);
+
+        themeSelect.addEventListener('change', () => {
+            localStorage.setItem('theme', themeSelect.value);
+            applyTheme(themeSelect.value);
+        });
+
+        // Carousel functionality
+        let currentIndex = 0;
+        const track = document.querySelector('.carousel-track');
+        const images = document.querySelectorAll('.carousel-track img');
+        const total = images.length;
+        const prevBtn = document.querySelector('.prev');
+        const nextBtn = document.querySelector('.next');
+        const indicatorsContainer = document.querySelector('.carousel-indicators');
+
+        // Create indicators
+        images.forEach((_, index) => {
+            const indicator = document.createElement('div');
+            indicator.classList.add('indicator');
+            if (index === 0) indicator.classList.add('active');
+            indicator.addEventListener('click', () => {
+                goToSlide(index);
+            });
+            indicatorsContainer.appendChild(indicator);
+        });
+
+        const indicators = document.querySelectorAll('.indicator');
+
+        function updateCarousel() {
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+            
+            // Update active indicator
+            indicators.forEach((indicator, index) => {
+                if (index === currentIndex) {
+                    indicator.classList.add('active');
+                } else {
+                    indicator.classList.remove('active');
+                }
+            });
+        }
+
+        function goToSlide(index) {
+            currentIndex = index;
+            updateCarousel();
+        }
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % total;
+            updateCarousel();
+        }
+
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + total) % total;
+            updateCarousel();
+        }
+
+        prevBtn.addEventListener('click', prevSlide);
+        nextBtn.addEventListener('click', nextSlide);
+
+        // Auto advance carousel
+        let carouselInterval = setInterval(nextSlide, 5000);
+
+        // Pause auto advance on hover
+        const carousel = document.querySelector('.carousel-container');
+        carousel.addEventListener('mouseenter', () => {
+            clearInterval(carouselInterval);
+        });
+
+        carousel.addEventListener('mouseleave', () => {
+            carouselInterval = setInterval(nextSlide, 5000);
+        });
+    </script>
+</body>
+</html>
