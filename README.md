@@ -19,7 +19,7 @@ The main goal of this project was to improve my front-end development skills and
 
 ## How to view
 You can view the live project here:  
-[https://ndeye-diegui-diedhiou.github.io/Front_End/](https://ndeye-diegui-diedhiou.github.io/Front_End/)
+[https://ndeye-diegui-diedhiou.github.io](https://ndeye-diegui-diedhiou.github.io)
 
 ## Contact
 For questions or feedback, feel free to reach out to me!
