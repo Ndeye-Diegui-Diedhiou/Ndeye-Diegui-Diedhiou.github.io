@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Friendship Zone - Registration</title>
+    <title>Friendship Zone - Login</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -67,7 +67,8 @@
             transition: background 0.5s, color 0.5s;
             line-height: 1.6;
             overflow-x: hidden;
-            padding-bottom: 40px;
+            display: flex;
+            flex-direction: column;
         }
 
         /* Animation */
@@ -236,14 +237,15 @@
         }
 
         /* Main Content */
-        .registration-container {
-            max-width: 800px;
+        .login-container {
+            max-width: 500px;
             margin: 40px auto;
             padding: 0 20px;
             animation: fadeIn 0.6s ease-out 0.2s both;
+            flex: 1;
         }
 
-        .registration-header {
+        .login-header {
             text-align: center;
             margin-bottom: 40px;
             padding: 20px;
@@ -253,7 +255,7 @@
             box-shadow: var(--shadow);
         }
 
-        .registration-header h1 {
+        .login-header h1 {
             font-size: 2.8rem;
             color: var(--primary);
             margin-bottom: 15px;
@@ -266,7 +268,7 @@
             -webkit-text-fill-color: transparent;
         }
 
-        .registration-header h1::after {
+        .login-header h1::after {
             content: "";
             position: absolute;
             bottom: -15px;
@@ -278,7 +280,7 @@
             border-radius: 5px;
         }
 
-        .registration-header p {
+        .login-header p {
             max-width: 600px;
             margin: 30px auto 0;
             font-size: 1.2rem;
@@ -286,8 +288,8 @@
             line-height: 1.8;
         }
 
-        /* Registration Form */
-        .registration-form {
+        /* Login Form */
+        .login-form {
             background: var(--card-bg);
             border-radius: var(--radius);
             padding: 50px;
@@ -297,7 +299,7 @@
             transition: var(--transition);
         }
 
-        .registration-form:hover {
+        .login-form:hover {
             box-shadow: var(--shadow-hover);
             transform: translateY(-5px);
         }
@@ -344,116 +346,25 @@
             background: rgba(255, 255, 255, 0.2);
         }
 
-        textarea.form-control {
-            min-height: 120px;
-            resize: vertical;
-        }
-
-        select.form-control {
-            appearance: none;
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235e35b1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-            background-repeat: no-repeat;
-            background-position: right 15px center;
-            background-size: 18px;
-            padding-right: 45px;
-        }
-
-        [data-theme="dark"] select.form-control {
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237e57c2' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            margin-bottom: 25px;
-        }
-
         .form-options {
             display: flex;
-            gap: 30px;
-            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
             margin-top: 10px;
+            flex-wrap: wrap;
         }
 
-        .option-group {
+        .remember-me {
             display: flex;
             align-items: center;
             gap: 10px;
-            padding: 8px 15px;
-            border-radius: 8px;
-            background: rgba(94, 53, 177, 0.05);
-            transition: var(--transition);
         }
 
-        .option-group:hover {
-            background: rgba(94, 53, 177, 0.1);
-            transform: translateY(-2px);
-        }
-
-        .option-group label {
-            margin-bottom: 0;
-            font-weight: 500;
-            color: var(--text);
-            cursor: pointer;
-        }
-
-        input[type="radio"],
         input[type="checkbox"] {
             accent-color: var(--accent2);
             width: 20px;
             height: 20px;
             cursor: pointer;
-        }
-
-        .file-upload {
-            position: relative;
-            overflow: hidden;
-            display: inline-block;
-            width: 100%;
-        }
-
-        .file-upload-btn {
-            background: rgba(94, 53, 177, 0.1);
-            color: var(--primary);
-            padding: 14px 20px;
-            border-radius: var(--radius-sm);
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            cursor: pointer;
-            transition: var(--transition);
-            border: 2px dashed var(--border);
-            width: 100%;
-            text-align: center;
-        }
-
-        .file-upload-btn:hover {
-            background: rgba(94, 53, 177, 0.2);
-            border-color: var(--accent2);
-            color: var(--accent2);
-        }
-
-        .file-upload input[type="file"] {
-            position: absolute;
-            left: 0;
-            top: 0;
-            opacity: 0;
-            width: 100%;
-            height: 100%;
-            cursor: pointer;
-        }
-
-        .file-name {
-            margin-top: 10px;
-            font-size: 0.95rem;
-            color: var(--text-light);
-            padding: 5px 10px;
-            border-radius: 6px;
-            background: rgba(0, 0, 0, 0.05);
-            display: inline-block;
         }
 
         .form-actions {
@@ -538,41 +449,65 @@
             width: 100%;
         }
 
-        /* Password strength meter */
-        .password-strength {
-            height: 8px;
-            background: var(--border);
-            border-radius: 4px;
-            margin-top: 12px;
-            overflow: hidden;
+        .social-login {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .social-title {
             position: relative;
+            margin-bottom: 25px;
+            color: var(--text);
+            font-weight: 500;
         }
 
-        .password-strength-meter {
-            height: 100%;
-            width: 0;
-            border-radius: 4px;
-            transition: width 0.4s ease;
+        .social-title::before,
+        .social-title::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 30%;
+            height: 1px;
+            background: var(--border);
         }
 
-        .strength-0 { width: 20%; background: var(--error); }
-        .strength-1 { width: 40%; background: #ff9800; }
-        .strength-2 { width: 60%; background: #ffc107; }
-        .strength-3 { width: 80%; background: #8bc34a; }
-        .strength-4 { width: 100%; background: var(--success); }
-
-        .strength-text {
-            font-size: 0.9rem;
-            margin-top: 8px;
-            text-align: right;
-            font-weight: 600;
+        .social-title::before {
+            left: 0;
         }
 
-        .strength-0 .strength-text { color: var(--error); }
-        .strength-1 .strength-text { color: #ff9800; }
-        .strength-2 .strength-text { color: #ffc107; }
-        .strength-3 .strength-text { color: #8bc34a; }
-        .strength-4 .strength-text { color: var(--success); }
+        .social-title::after {
+            right: 0;
+        }
+
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            color: white;
+            font-size: 1.5rem;
+            transition: var(--transition);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .social-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .facebook { background: #3b5998; }
+        .google { background: #db4437; }
+        .twitter { background: #1da1f2; }
 
         /* Footer */
         footer {
@@ -668,11 +603,11 @@
 
         /* Responsive */
         @media (max-width: 900px) {
-            .registration-header h1 {
+            .login-header h1 {
                 font-size: 2.4rem;
             }
             
-            .registration-form {
+            .login-form {
                 padding: 40px 30px;
             }
         }
@@ -700,11 +635,11 @@
                 display: block;
             }
             
-            .registration-header h1 {
+            .login-header h1 {
                 font-size: 2.2rem;
             }
             
-            .registration-header p {
+            .login-header p {
                 font-size: 1.1rem;
             }
             
@@ -718,19 +653,14 @@
         }
 
         @media (max-width: 576px) {
-            .registration-header h1 {
+            .login-header h1 {
                 font-size: 2rem;
             }
             
-            .form-row {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            
             .form-options {
-                gap: 15px;
                 flex-direction: column;
                 align-items: flex-start;
+                gap: 15px;
             }
             
             .footer-content {
@@ -787,189 +717,47 @@
         </div>
     </nav>
     
-    <!-- Registration Section -->
-    <div class="registration-container">
-        <div class="registration-header">
-            <h1>Join Our Community</h1>
-            <p>Create your account and start connecting with amazing people across Africa. Friendship Zone brings people together through shared interests, cultures, and experiences.</p>
+    <!-- Login Section -->
+    <div class="login-container">
+        <div class="login-header">
+            <h1>Welcome Back</h1>
+            <p>Sign in to continue your journey and connect with amazing people across Africa</p>
         </div>
         
-        <form class="registration-form" id="registrationForm" action="submit_registration.php" method="POST" enctype="multipart/form-data">
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="firstName"><i class="fas fa-user"></i> First Name</label>
-                    <input type="text" id="firstName" name="firstName" class="form-control" placeholder="Enter your first name" required>
-                </div>
-                <div class="form-group">
-                    <label for="lastName"><i class="fas fa-user"></i> Last Name</label>
-                    <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Enter your last name" required>
-                </div>
-            </div>
-
+        <form class="login-form" id="loginForm" action="login.php" method="POST">
             <div class="form-group">
                 <label for="email"><i class="fas fa-envelope"></i> Email</label>
                 <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email address" required>
             </div>
 
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="password"><i class="fas fa-lock"></i> Password</label>
-                    <input type="password" id="password" name="password" class="form-control" placeholder="Create a strong password" required>
-                    <div class="password-strength">
-                        <div class="password-strength-meter" id="passwordStrength"></div>
-                    </div>
-                    <div class="strength-text" id="strengthText">Password strength</div>
-                </div>
-                <div class="form-group">
-                    <label for="confirmPassword"><i class="fas fa-lock"></i> Confirm Password</label>
-                    <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" placeholder="Confirm your password" required>
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="birthdate"><i class="fas fa-calendar"></i> Date of Birth</label>
-                    <input type="date" id="birthdate" name="birthdate" class="form-control" required>
-                </div>
-
-                <div class="form-group">
-                    <label><i class="fas fa-venus-mars"></i> Gender</label>
-                    <div class="form-options">
-                        <div class="option-group">
-                            <input type="radio" id="male" name="gender" value="male" required>
-                            <label for="male">Male</label>
-                        </div>
-                        <div class="option-group">
-                            <input type="radio" id="female" name="gender" value="female">
-                            <label for="female">Female</label>
-                        </div>
-                        <div class="option-group">
-                            <input type="radio" id="other" name="gender" value="other">
-                            <label for="other">Other</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <div class="form-group">
-                <label for="country"><i class="fas fa-globe-africa"></i> Country</label>
-                <select id="country" name="country" class="form-control" required>
-                    <option value="">Select your country</option>
-                    <option value="Senegal">Senegal</option>
-                    <option value="Mali">Mali</option>
-                    <option value="Ivory Coast">Ivory Coast</option>
-                    <option value="Gambia">Gambia</option>
-                    <option value="Ghana">Ghana</option>
-                    <option value="Nigeria">Nigeria</option>
-                    <option value="Cameroon">Cameroon</option>
-                    <option value="South Africa">South Africa</option>
-                    <option value="Kenya">Kenya</option>
-                    <option value="Uganda">Uganda</option>
-                    <option value="Tanzania">Tanzania</option>
-                    <option value="Rwanda">Rwanda</option>
-                    <option value="Burkina Faso">Burkina Faso</option>
-                    <option value="Benin">Benin</option>
-                    <option value="Togo">Togo</option>
-                    <option value="Zimbabwe">Zimbabwe</option>
-                    <option value="Zambia">Zambia</option>
-                    <option value="Malawi">Malawi</option>
-                    <option value="Botswana">Botswana</option>
-                    <option value="Namibia">Namibia</option>
-                    <option value="Angola">Angola</option>
-                    <option value="Mozambique">Mozambique</option>
-                    <option value="Sierra Leone">Sierra Leone</option>
-                    <option value="Liberia">Liberia</option>
-                    <option value="Guinea">Guinea</option>
-                    <option value="Guinea-Bissau">Guinea-Bissau</option>
-                    <option value="Central African Republic">Central African Republic</option>
-                    <option value="Chad">Chad</option>
-                    <option value="Congo">Congo</option>
-                    <option value="Democratic Republic of the Congo">Democratic Republic of the Congo</option>
-                    <option value="Equatorial Guinea">Equatorial Guinea</option>
-                    <option value="Sao Tome and Principe">Sao Tome and Principe</option>
-                    <option value="Eritrea">Eritrea</option>
-                    <option value="Djibouti">Djibouti</option>
-                    <option value="Somalia">Somalia</option>
-                    <option value="Sudan">Sudan</option>
-                    <option value="South Sudan">South Sudan</option>
-                    <option value="Ethiopia">Ethiopia</option>
-                    <option value="Mauritania">Mauritania</option>
-                    <option value="Cape Verde">Cape Verde</option>
-                    <option value="Seychelles">Seychelles</option>
-                    <option value="Comoros">Comoros</option>
-                    <option value="Madagascar">Madagascar</option>
-                    <option value="Mauritius">Mauritius</option>
-                    <option value="Saint Helena">Saint Helena</option>
-                    <option value="Mayotte">Mayotte</option>
-                    <option value="Reunion">Reunion</option>
-                    <option value="Tanzania">Tanzania</option>
-                    <option value="Burundi">Burundi</option>
-                    <option value="Lesotho">Lesotho</option>
-                    <option value="Eswatini">Eswatini</option>
-                    <option value="Sao Tome and Principe">Morocco</option>
-                    <option value="Gabon">Gabon</option>
-                    <option value="Equatorial Guinea">Algeria</option>
-                    <option value="Tunisia">Tunisia</option>
-                    <option value="Libya">Libya</option>
-                    <option value="Egypt">Egypt</option>
-                </select>
+                <label for="password"><i class="fas fa-lock"></i> Password</label>
+                <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password" required>
             </div>
 
-            <div class="form-group">
-                <label for="phone"><i class="fas fa-phone"></i> Phone</label>
-                <input type="tel" id="phone" name="phone" class="form-control" placeholder="Enter your phone number" required>
-            </div>
-
-            <div class="form-group">
-                <label for="interests"><i class="fas fa-heart"></i> Interests</label>
-                <textarea id="interests" name="interests" class="form-control" placeholder="What are your hobbies and interests? (e.g. music, sports, travel, technology)"></textarea>
-            </div>
-
-            <div class="form-group">
-                <label><i class="fas fa-handshake"></i> Looking For</label>
-                <div class="form-options">
-                    <div class="option-group">
-                        <input type="checkbox" id="friendship" name="lookingFor[]" value="friendship">
-                        <label for="friendship">Friendship</label>
-                    </div>
-                    <div class="option-group">
-                        <input type="checkbox" id="dating" name="lookingFor[]" value="dating">
-                        <label for="dating">Dating</label>
-                    </div>
-                    <div class="option-group">
-                        <input type="checkbox" id="networking" name="lookingFor[]" value="networking">
-                        <label for="networking">Networking</label>
-                    </div>
-                    <div class="option-group">
-                        <input type="checkbox" id="travel" name="lookingFor[]" value="travel">
-                        <label for="travel">Travel</label>
-                    </div>
+            <div class="form-options">
+                <div class="remember-me">
+                    <input type="checkbox" id="remember" name="remember">
+                    <label for="remember">Remember me</label>
                 </div>
-            </div>
-
-            <div class="form-group">
-                <label for="profilePhoto"><i class="fas fa-camera"></i> Profile Photo</label>
-                <div class="file-upload">
-                    <div class="file-upload-btn">
-                        <i class="fas fa-cloud-upload-alt"></i> Choose a file
-                    </div>
-                    <input type="file" id="profilePhoto" name="profilePhoto" accept="image/*">
-                </div>
-                <div class="file-name" id="fileName">No file chosen</div>
-            </div>
-
-            <div class="form-group">
-                <div class="option-group">
-                    <input type="checkbox" id="terms" name="terms" required>
-                    <label for="terms">I agree to the <a href="#">Terms</a> and <a href="#">Privacy Policy</a></label>
-                </div>
+                <a href="#" class="forgot-password">Forgot password?</a>
             </div>
 
             <div class="form-actions">
-                <button type="submit" class="form-btn btn-primary"><i class="fas fa-user-plus"></i> Create Account</button>
+                <button type="submit" class="form-btn btn-primary"><i class="fas fa-sign-in-alt"></i> Login</button>
             </div>
+
+            <div class="social-login">
+                <div class="social-title">Or sign in with</div>
+                <div class="social-buttons">
+                    <a href="#" class="social-btn facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-btn google"><i class="fab fa-google"></i></a>
+                    <a href="#" class="social-btn twitter"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+
             <div class="form-footer">
-                <p>Already have an account? <a href="LoginForm.html">Log in</a></p> 
+                <p>Don't have an account? <a href="RegistrationForm.html">Sign up</a></p> 
             </div>
         </form>
     </div>
@@ -1049,122 +837,55 @@
         
         menuIcon.addEventListener('click', () => {
             navLinks.classList.toggle('active');
-            menuIcon.querySelector('i').classList.toggle('fa-bars');
-            menuIcon.querySelector('i').classList.toggle('fa-times');
-        });
-
-        // Password strength indicator
-        const passwordInput = document.getElementById('password');
-        const passwordStrength = document.getElementById('passwordStrength');
-        const strengthText = document.getElementById('strengthText');
-        
-        passwordInput.addEventListener('input', function() {
-            const password = this.value;
-            let strength = 0;
-            
-            // Check password length
-            if (password.length >= 8) strength += 1;
-            if (password.length >= 12) strength += 1;
-            
-            // Check for mixed case
-            if (password.match(/([a-z].*[A-Z])|([A-Z].*[a-z])/)) strength += 1;
-            
-            // Check for numbers
-            if (password.match(/([0-9])/)) strength += 1;
-            
-            // Check for special characters
-            if (password.match(/([!,@,#,$,%,^,&,*,?,_,~])/)) strength += 1;
-            
-            // Update strength meter
-            passwordStrength.className = 'password-strength-meter strength-' + strength;
-            
-            // Update text
-            const strengthMessages = [
-                'Very weak',
-                'Weak',
-                'Medium',
-                'Strong',
-                'Very strong'
-            ];
-            strengthText.textContent = strengthMessages[strength];
-            strengthText.className = 'strength-text strength-' + strength;
-        });
-
-        // File upload display
-        const fileInput = document.getElementById('profilePhoto');
-        const fileName = document.getElementById('fileName');
-        
-        fileInput.addEventListener('change', function() {
-            if (this.files.length > 0) {
-                fileName.textContent = this.files[0].name;
-                fileName.style.color = "var(--success)";
-                fileName.style.fontWeight = "600";
+            const icon = menuIcon.querySelector('i');
+            if (icon.classList.contains('fa-bars')) {
+                icon.classList.replace('fa-bars', 'fa-times');
             } else {
-                fileName.textContent = 'No file chosen';
-                fileName.style.color = "var(--text-light)";
-                fileName.style.fontWeight = "normal";
+                icon.classList.replace('fa-times', 'fa-bars');
             }
         });
 
-        // Form validation
-        const registrationForm = document.getElementById('registrationForm');
-        const confirmPassword = document.getElementById('confirmPassword');
+        // Form validation and animation
+        const loginForm = document.getElementById('loginForm');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
         
-        registrationForm.addEventListener('submit', function(e) {
+        loginForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Check if passwords match
-            if (passwordInput.value !== confirmPassword.value) {
-                alert('Passwords do not match!');
-                confirmPassword.focus();
+            // Basic validation
+            if (!emailInput.value || !passwordInput.value) {
+                alert('Please fill in all fields');
                 return false;
             }
             
-            // Check if at least one interest is selected
-            const interests = document.querySelectorAll('input[name="lookingFor[]"]:checked');
-            if (interests.length === 0) {
-                alert('Please select at least one interest!');
-                return false;
-            }
-            
-            // Check if terms are accepted
-            if (!document.getElementById('terms').checked) {
-                alert('You must agree to the Terms of Service and Privacy Policy!');
-                return false;
-            }
-            
-            // Show success message with animation
+            // Show loading animation
             const submitBtn = document.querySelector('.btn-primary');
-            submitBtn.innerHTML = '<i class="fas fa-check"></i> Account Created!';
-            submitBtn.style.background = 'linear-gradient(135deg, var(--success) 0%, var(--success-light) 100%)';
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
+            submitBtn.disabled = true;
             
+            // Simulate login process
             setTimeout(() => {
-                alert('Registration successful! Welcome to Friendship Zone.');
-                // In a real application, you would submit the form here
-                // For now, we'll just reset the form
-                registrationForm.reset();
-                fileName.textContent = 'No file chosen';
-                fileName.style.color = "var(--text-light)";
-                fileName.style.fontWeight = "normal";
-                passwordStrength.className = 'password-strength-meter strength-0';
-                strengthText.textContent = 'Password strength';
-                strengthText.className = 'strength-text';
-                
                 // Reset button
-                submitBtn.innerHTML = '<i class="fas fa-user-plus"></i> Create Account';
-                submitBtn.style.background = 'linear-gradient(135deg, var(--primary) 0%, var(--accent2) 100%)';
-            }, 1500);
+                submitBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login';
+                submitBtn.disabled = false;
+                
+                // Show success message
+                alert('Login successful! Welcome back to Friendship Zone.');
+                
+                // In a real application, you would submit the form here
+                // For now, we'll just redirect to a placeholder
+                // window.location.href = 'dashboard.html';
+            }, 2000);
         });
 
-        // Add placeholder text for date input
-        const birthdateInput = document.getElementById('birthdate');
-        birthdateInput.addEventListener('focus', function() {
-            this.type = 'date';
-        });
-        birthdateInput.addEventListener('blur', function() {
-            if (!this.value) {
-                this.type = 'text';
-                this.placeholder = 'Select your birthdate';
+        // Forgot password interaction
+        const forgotPassword = document.querySelector('.forgot-password');
+        forgotPassword.addEventListener('click', function(e) {
+            e.preventDefault();
+            const email = prompt('Please enter your email to reset password:');
+            if (email) {
+                alert(`Password reset instructions have been sent to ${email}`);
             }
         });
     </script>
