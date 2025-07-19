@@ -28,10 +28,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['user_name'] = $user['first_name'];
 
+        echo "Connexion réussie ! Bienvenue, " . htmlspecialchars($user['first_name']) . ".";
+        // Redirection vers le tableau de bord ou une autre page
         header("Location: dashboard.php");
+        
         exit();
     } else {
         echo "Identifiants incorrects.";
     }
 }
+
 ?>

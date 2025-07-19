@@ -219,7 +219,7 @@
             border-radius: 8px;
             border: 2px solid rgba(255, 255, 255, 0.2);
             background: rgba(255, 255, 255, 0.15);
-            color: white;
+            color: rgb(0, 0, 0);
             font-size: 1rem;
             cursor: pointer;
             transition: var(--transition);
@@ -555,6 +555,9 @@
             list-style: none;
         }
 
+        
+       
+
         .footer-links li {
             margin-bottom: 15px;
         }
@@ -724,7 +727,7 @@
             <p>Sign in to continue your journey and connect with amazing people across Africa</p>
         </div>
         
-        <form class="login-form" id="loginForm" action="login.php" method="POST">
+        <form class="login-form" id="loginForm" action="login.php" method="post">
             <div class="form-group">
                 <label for="email"><i class="fas fa-envelope"></i> Email</label>
                 <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email address" required>
